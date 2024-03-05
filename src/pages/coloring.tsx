@@ -158,8 +158,8 @@ const Coloring = () => {
             <div className={styles.canvasBox}>
               <NextImage
                 src={imageURL}
-                width={1024}
-                height={1024}
+                fill
+                objectFit="cover"
                 alt="도안 이미지"
                 className={styles.image}
               />
@@ -167,7 +167,6 @@ const Coloring = () => {
                 ref={canvasRef}
                 width={1024}
                 height={1024}
-                style={{ width: '100%', height: 'auto' }}
                 className={styles.canvas}
               />
             </div>
@@ -206,6 +205,32 @@ const Coloring = () => {
             </button>
           </div>
           <div className={styles.brushSize}>
+            <div
+              className={styles.brushSizeIndicator}
+              style={{
+                width: '100%',
+                height: '100%',
+                maxWidth: '50px',
+                maxHeight: '50px',
+                borderRadius: '50%',
+
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                position: 'relative',
+              }}
+            >
+              <div
+                style={{
+                  width: `${brushSize}px`,
+                  height: `${brushSize}px`,
+                  borderRadius: '50%',
+                  backgroundColor: '#373740',
+                  position: 'absolute',
+                }}
+              ></div>
+            </div>
+
             <input
               type="range"
               min="1"
@@ -219,13 +244,16 @@ const Coloring = () => {
               <span>지우개 크기: {brushSize}</span>
             )}
           </div>
+
           <input
+            className={styles.nowColor}
             type="color"
             value={color}
             onChange={handleColorChange}
             onBlur={handleColorSelect}
             disabled={tool === 'eraser'}
           />
+
           <div className={styles.savedColors}>
             {Array.from({ length: MAX_COLORS }).map((_, index) => {
               const color = savedColors[index];
