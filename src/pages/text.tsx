@@ -2,11 +2,7 @@ import styles from '@/styles/text.module.css';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import Image from 'next/image';
 import axios from 'axios';
-import {
-  DEFAULT_PROMPT,
-  PROMPT_TEST,
-  PROMPT_TEST2,
-} from '@/constants/constants';
+import { DEFAULT_PROMPT, PROMPT_TEST, PROMPT_TEST2 } from '@/constants/prompt';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { setImageUrl } from '../features/imageSlice';

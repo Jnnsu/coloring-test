@@ -3,7 +3,7 @@ import styles from '@/styles/voice.module.css';
 import { useSpeachToText } from '@/hooks/useSpeachToText';
 import Image from 'next/image';
 import axios from 'axios';
-import { DEFAULT_PROMPT, PROMPT_TEST } from '@/constants/constants';
+import { DEFAULT_PROMPT, PROMPT_TEST } from '@/constants/prompt';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { setImageUrl } from '../features/imageSlice';

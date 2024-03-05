@@ -7,7 +7,7 @@ import {
   PROMPT_TEST,
   PROMPT_TEST2,
   PROMPT_TEST3,
-} from '@/constants/constants';
+} from '@/constants/prompt';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { setImageUrl } from '../features/imageSlice';

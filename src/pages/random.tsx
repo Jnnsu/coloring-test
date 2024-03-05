@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { DEFAULT_PROMPT } from '@/constants/constants';
+import { DEFAULT_PROMPT } from '@/constants/prompt';
 
 const ImageGenerator = () => {
   const [image, setImage] = useState('');
