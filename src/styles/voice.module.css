@@ -1,0 +1,87 @@
+.background {
+  font-size: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  width: 100vw;
+  height: 100vh;
+  background-color: #efebe0;
+}
+
+.formContainer {
+  padding: 50px;
+  border-radius: 10px;
+  background-color: #f5f7f8;
+  box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.2);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  position: relative;
+}
+
+.inputText {
+  text-align: center;
+  font-size: 30px;
+}
+
+.recording {
+  position: absolute;
+  top: 100px;
+  right: 10px;
+  padding: 30px;
+}
+
+.voiceButton {
+}
+
+.voiceIcon {
+  border-radius: 50%;
+  box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.2);
+}
+
+.input-box {
+  display: flex;
+  gap: 30px;
+}
+
+.voice-input {
+  width: 600px;
+  height: 70px;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.submitButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.submitButton {
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #512b0c;
+  color: #fff;
+  width: 150px;
+  box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.08);
+}
+
+.imageContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}

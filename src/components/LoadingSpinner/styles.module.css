@@ -1,0 +1,13 @@
+.spinner {
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.6rem;
+  width: 600px;
+}
+
+.spinner p {
+  font-size: 2rem;
+}
