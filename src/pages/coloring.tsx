@@ -3,14 +3,15 @@ import { RootState } from '../app/store';
 import { useState, useRef, useEffect, ChangeEvent } from 'react';
 import styles from '@/styles/coloring.module.css';
 import NextImage from 'next/image';
-import { MAX_COLORS } from '@/constants/color';
+import { ColoringToolbar } from '@/components/ColoringToolbar';
 
 const Coloring = () => {
   const imageURL = useSelector((state: RootState) => state.image.imageUrl);
-  const [color, setColor] = useState('#ffffff');
-  const [savedColors, setSavedColors] = useState<string[]>([]);
-  const [tool, setTool] = useState('brush');
-  const [brushSize, setBrushSize] = useState(10);
+  const color = useSelector((state: RootState) => state.coloringTools.color);
+  const tool = useSelector((state: RootState) => state.coloringTools.tool);
+  const brushSize = useSelector(
+    (state: RootState) => state.coloringTools.brushSize,
+  );
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isPainting, setIsPainting] = useState(false);
 
@@ -30,15 +31,6 @@ const Coloring = () => {
       context.clearRect(0, 0, canvas.width, canvas.height); // 이미지를 다시 그리기 전에 캔버스를 클리어
       context.drawImage(image, 0, 0, canvas.width, canvas.height);
     };
-  };
-
-  const clearCanvas = () => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const context = canvas.getContext('2d');
-    if (!context) return;
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    loadImage();
   };
 
   const startPainting = (e: MouseEvent | TouchEvent) => {
@@ -65,9 +57,9 @@ const Coloring = () => {
     context.fill();
   };
 
-  const stopPainting = () => {
-    setIsPainting(false);
-  };
+  // const stopPainting = () => {
+  //   setIsPainting(false);
+  // };
 
   const getCoordinates = (event: MouseEvent | TouchEvent) => {
     const canvas = canvasRef.current;
@@ -81,29 +73,6 @@ const Coloring = () => {
     };
   };
 
-  const handleBrushSizeChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setBrushSize(Number(e.target.value));
-  };
-
-  const handleColorChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setColor(e.target.value);
-  };
-
-  const handleColorSelect = (e: React.FocusEvent<HTMLInputElement>) => {
-    const newColor = e.target.value;
-    if (!savedColors.includes(newColor)) {
-      if (savedColors.length >= MAX_COLORS) {
-        setSavedColors((prev) => [newColor, ...prev.slice(0, -1)]);
-      } else {
-        setSavedColors((prev) => [newColor, ...prev]);
-      }
-    }
-  };
-
-  const handleSavedColorClick = (selectedColor: string) => {
-    setColor(selectedColor);
-  };
-
   const handleMouseMove = (event: MouseEvent) => {
     if (isPainting) {
       const coordinates = getCoordinates(event);
@@ -114,7 +83,7 @@ const Coloring = () => {
   };
 
   const handleTouchMove = (event: TouchEvent) => {
-    event.preventDefault(); // 스크롤 방지
+    event.preventDefault();
     if (isPainting) {
       const coordinates = getCoordinates(event);
       if (coordinates) {
@@ -135,11 +104,10 @@ const Coloring = () => {
 
     // 터치 이벤트
     canvas.addEventListener('touchstart', startPainting);
-    canvas.addEventListener('touchmove', handleTouchMove, { passive: false }); // passive 옵션을 false로 설정하여 preventDefault 호출 가능
+    canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
     canvas.addEventListener('touchend', () => setIsPainting(false));
 
     return () => {
-      // 이벤트 리스너 해제
       canvas.removeEventListener('mousedown', startPainting);
       canvas.removeEventListener('mousemove', handleMouseMove);
       canvas.removeEventListener('mouseup', () => setIsPainting(false));
@@ -150,134 +118,50 @@ const Coloring = () => {
     };
   }, [isPainting, color, tool]);
 
+  useEffect(() => {
+    const updateCanvasSize = () => {
+      const canvas = canvasRef.current;
+      if (canvas && canvas.parentElement) {
+        const { width, height } = canvas.parentElement.getBoundingClientRect();
+        canvas.width = width;
+        canvas.height = height;
+      }
+    };
+
+    window.addEventListener('resize', updateCanvasSize);
+    updateCanvasSize(); // 초기 로딩시에도 캔버스 사이즈 업데이트
+
+    return () => {
+      window.removeEventListener('resize', updateCanvasSize);
+    };
+  }, []); // 의존성 배열을 비워서 컴포넌트 마운트 시에만 실행되도록 함
+
   return (
     <div className={styles.background}>
-      <div className={styles.article}>
+      <div className={styles.canvasBox}>
         <div className={styles.imageContainer}>
           {imageURL ? (
-            <div className={styles.canvasBox}>
+            <div className={styles.imagebox}>
               <NextImage
+                className={styles.image}
                 src={imageURL}
                 fill
                 objectFit="cover"
                 alt="도안 이미지"
-                className={styles.image}
               />
               <canvas
+                className={styles.canvas}
                 ref={canvasRef}
                 width={1024}
                 height={1024}
-                className={styles.canvas}
               />
             </div>
           ) : (
             <p>생성된 이미지가 없습니다.</p>
           )}
         </div>
-        <div className={styles.palette}>
-          <button onClick={clearCanvas} className={styles.clearButton}>
-            CLEAR
-          </button>
-          <div className={styles.brushs}>
-            <button
-              onClick={() => setTool('brush')}
-              type="button"
-              className={`${styles.brush} ${tool === 'brush' ? styles.brushSelected : ''}`}
-            >
-              <NextImage
-                width={45}
-                height={45}
-                src="/images/brush1.png"
-                alt="브러쉬 아이콘"
-              />
-            </button>
-            <button
-              onClick={() => setTool('eraser')}
-              type="button"
-              className={`${styles.brush} ${tool === 'eraser' ? styles.brushSelected : ''}`}
-            >
-              <NextImage
-                width={40}
-                height={40}
-                src="/images/eraser1.png"
-                alt="지우개 아이콘"
-              />
-            </button>
-          </div>
-          <div className={styles.brushSize}>
-            <div
-              className={styles.brushSizeIndicator}
-              style={{
-                width: '100%',
-                height: '100%',
-                maxWidth: '50px',
-                maxHeight: '50px',
-                borderRadius: '50%',
-
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                position: 'relative',
-              }}
-            >
-              <div
-                style={{
-                  width: `${brushSize}px`,
-                  height: `${brushSize}px`,
-                  borderRadius: '50%',
-                  backgroundColor: '#373740',
-                  position: 'absolute',
-                }}
-              ></div>
-            </div>
-
-            <input
-              type="range"
-              min="1"
-              max="50"
-              value={brushSize}
-              onChange={handleBrushSizeChange}
-            />
-            {tool === 'brush' ? (
-              <span>브러시 크기: {brushSize}</span>
-            ) : (
-              <span>지우개 크기: {brushSize}</span>
-            )}
-          </div>
-
-          <input
-            className={styles.nowColor}
-            type="color"
-            value={color}
-            onChange={handleColorChange}
-            onBlur={handleColorSelect}
-            disabled={tool === 'eraser'}
-          />
-
-          <div className={styles.savedColors}>
-            {Array.from({ length: MAX_COLORS }).map((_, index) => {
-              const color = savedColors[index];
-              return (
-                <button
-                  className={styles.savedColor}
-                  key={index}
-                  onClick={() => color && handleSavedColorClick(color)}
-                  title={
-                    color ? `색상 사용: ${color}` : '사용 가능한 색상 없음'
-                  }
-                  style={{
-                    backgroundColor: color || 'rgba(0, 0, 0, 0.1)',
-                    width: '40px',
-                    height: '40px',
-                    margin: '2px',
-                    border: color ? 'none' : '1px solid #ccc',
-                  }}
-                ></button>
-              );
-            })}
-          </div>
-        </div>
       </div>
+      <ColoringToolbar canvasRef={canvasRef} loadImage={() => loadImage()} />
     </div>
   );
 };

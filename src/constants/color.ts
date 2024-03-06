@@ -1,1 +1,1 @@
-export const MAX_COLORS = 20;
+export const MAX_COLORS = 21;

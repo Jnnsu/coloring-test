@@ -7,14 +7,14 @@
   gap: 30px;
   width: 100vw;
   height: 100vh;
-  background-color: #efebe0;
+  background-color: #161a30;
 }
 
 .formContainer {
   padding: 50px;
   border-radius: 10px;
-  background-color: #f5f7f8;
-  box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.2);
+  background-color: #f0ece5;
+  box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 1);
 }
 
 .form {
@@ -44,7 +44,9 @@
   padding: 30px;
 }
 
-.voiceButton {
+.voiceButton:hover {
+  border-radius: 50%;
+  box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.1);
 }
 
 .voiceIcon {
@@ -78,6 +80,11 @@
   color: #fff;
   width: 150px;
   box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.08);
+}
+
+.submitButton:hover {
+  background-color: #331904;
+  box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.3);
 }
 
 .imageContainer {
