@@ -35,20 +35,13 @@ const Login = () => {
       case 'test2':
         router.push('/voice');
         break;
+      case 'test3':
+        router.push('/text');
+        break;
       default:
         alert('테스트를 선택해 주세요.');
         return;
     }
-  };
-
-  const handleTest1Click = () => {
-    setTestValue('test1');
-  };
-  const handleTest2Click = () => {
-    setTestValue('test2');
-  };
-  const handleTest3Click = () => {
-    setTestValue('test3');
   };
 
   return (

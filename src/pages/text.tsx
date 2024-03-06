@@ -9,14 +9,29 @@ import { setImageUrl } from '../features/imageSlice';
 import LoadingSpinner from '@/components/LoadingSpinner';
 
 function Test3() {
-  const [inputValue, setInputValue] = useState('');
+  const [promptAValue, setPromptAValue] = useState('');
+  const [promptBValue, setPromptBValue] = useState('');
+  const [promptCValue, setPromptCValue] = useState('');
+  const [promptDValue, setPromptDValue] = useState('');
   const [imageURL, setImageURL] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
+  const handlePromptAChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setPromptAValue(e.target.value);
+  };
+
+  const handlePromptBChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setPromptBValue(e.target.value);
+  };
+
+  const handlePromptCChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setPromptCValue(e.target.value);
+  };
+
+  const handlePromptDChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setPromptDValue(e.target.value);
   };
 
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -24,7 +39,7 @@ function Test3() {
     if (isLoading) {
       return;
     }
-    if (!inputValue) {
+    if (!promptAValue) {
       alert('도안을 먼저 작성해 주세요.');
       return;
     }
@@ -34,7 +49,7 @@ function Test3() {
         'https://api.openai.com/v1/images/generations',
         {
           model: 'dall-e-3',
-          prompt: DEFAULT_PROMPT + inputValue,
+          prompt: promptAValue + promptBValue + promptCValue + promptDValue,
           n: 1,
           size: '1024x1024',
         },
@@ -62,14 +77,49 @@ function Test3() {
           {!imageURL ? (
             !isLoading ? (
               <>
-                <h1>당신의 예술 작품을 만드세요!</h1>
+                <h1>프롬프트 테스트</h1>
                 <div className={styles.inputContainer}>
-                  <input
-                    type="text"
-                    onChange={handleChange}
-                    placeholder="이미지 설명을 입력하세요"
-                    className={styles.input}
-                  />
+                  <div className={styles.prompt}>
+                    <label htmlFor="promptA">A</label>
+                    <input
+                      id="promptA"
+                      type="text"
+                      onChange={handlePromptAChange}
+                      placeholder="이미지 설명을 입력하세요"
+                      className={styles.input}
+                      required
+                    />
+                  </div>
+                  <div className={styles.prompt}>
+                    <label htmlFor="promptB">B</label>
+                    <input
+                      id="promptB"
+                      type="text"
+                      onChange={handlePromptBChange}
+                      placeholder="이미지 설명을 입력하세요"
+                      className={styles.input}
+                    />
+                  </div>
+                  <div className={styles.prompt}>
+                    <label htmlFor="promptC">C</label>
+                    <input
+                      id="promptC"
+                      type="text"
+                      onChange={handlePromptCChange}
+                      placeholder="이미지 설명을 입력하세요"
+                      className={styles.input}
+                    />
+                  </div>
+                  <div className={styles.prompt}>
+                    <label htmlFor="promptD">D</label>
+                    <input
+                      id="promptD"
+                      type="text"
+                      onChange={handlePromptDChange}
+                      placeholder="이미지 설명을 입력하세요"
+                      className={styles.input}
+                    />
+                  </div>
                   <button type="submit" className={styles.submitButton}>
                     생성하기
                   </button>
@@ -77,7 +127,7 @@ function Test3() {
               </>
             ) : (
               <>
-                <h1>당신의 예술 작품을 만드세요!</h1>
+                <h1>프롬프트 테스트</h1>
                 <LoadingSpinner />
               </>
             )
