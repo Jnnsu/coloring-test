@@ -1,0 +1,57 @@
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  width: 100%;
+}
+
+.input {
+  width: 90%;
+  height: auto;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.input:focus::placeholder {
+  color: transparent;
+  transition: color 0.3s ease;
+}
+
+.submitButton {
+  width: 150px;
+  padding: 15px;
+
+  color: #fff;
+  border-radius: 8px;
+  background-color: #512b0c;
+  box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.08);
+}
+
+.submitButton:hover {
+  background-color: #331904;
+  box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.3);
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+}
+
+@media (min-width: 375px) and (max-width: 767px) {
+  .inputContainer {
+    gap: 20px;
+  }
+
+  .input {
+    width: 90%;
+    padding: 13px;
+    border-radius: 8px;
+    font-size: 1.4rem;
+  }
+
+  .submitButton {
+    width: 150px;
+    padding: 10px;
+    font-size: 1.4rem;
+  }
+}

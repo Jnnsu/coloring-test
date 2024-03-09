@@ -1,0 +1,105 @@
+.brushSettings {
+  width: 100%;
+}
+
+.brushs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.brush {
+  padding: 7px;
+  border-radius: 10px;
+}
+
+.brushTool {
+  width: 40px;
+  height: 40px;
+  position: relative;
+}
+
+.brushSelected {
+  background-color: #ccd5e3;
+}
+
+.brushSize {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.indicatorBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 65px;
+}
+
+.brushSizeIndicator {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid #373740;
+}
+
+.brushSizeRange {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.range {
+  width: 110px;
+}
+
+@media (max-width: 1199px) {
+  .brushs {
+    gap: 8px;
+  }
+
+  .brushTool {
+    width: 25px;
+    height: 25px;
+  }
+
+  .indicatorBox {
+    height: 65px;
+  }
+
+  .range {
+    width: 90px;
+  }
+}
+
+@media (min-width: 375px) and (max-width: 767px) {
+  .brushs {
+    gap: 3px;
+  }
+
+  .brush {
+    padding: 3px;
+    border-radius: 8px;
+  }
+
+  .brushTool {
+    width: 17px;
+    height: 17px;
+  }
+
+  .indicatorBox {
+    display: none;
+  }
+
+  .brushSizeRange > span {
+    font-size: 1.2rem;
+  }
+
+  .range {
+    margin-top: 10px;
+    width: 50px;
+  }
+}

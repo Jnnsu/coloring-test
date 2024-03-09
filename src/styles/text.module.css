@@ -1,5 +1,5 @@
 .background {
-  font-size: 2rem;
+  font-size: 1.8rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -8,62 +8,4 @@
   width: 100vw;
   height: 100vh;
   background-color: #161a30;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 30px;
-  padding: 40px;
-  border-radius: 10px;
-  background-color: #f0ece5;
-  box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 1);
-}
-
-.form h1 {
-  font-size: 30px;
-}
-
-.inputContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 30px;
-}
-
-.input {
-  width: 600px;
-  height: 70px;
-  padding: 20px;
-  border-radius: 8px;
-}
-
-.submitButtons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 30px;
-}
-
-.submitButton {
-  padding: 15px;
-  border-radius: 8px;
-  background-color: #512b0c;
-  color: #fff;
-  width: 150px;
-  box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.08);
-}
-
-.submitButton:hover {
-  background-color: #331904;
-  box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.3);
-}
-
-.prompt {
-  display: flex;
-  align-items: center;
-  gap: 20px;
 }

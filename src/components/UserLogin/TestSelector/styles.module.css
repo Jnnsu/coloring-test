@@ -1,0 +1,11 @@
+.selector {
+  color: var(--Grayscale-40);
+  font-size: 16px;
+  border-width: 1.5px;
+  border-radius: 8px;
+  width: 100%;
+  padding: 10px 14px;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: color 0.3s ease;
+}

@@ -1,0 +1,45 @@
+.inputGroup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 16px;
+  gap: 4px;
+  width: 100%;
+
+  border-radius: 8px;
+  border: 2px solid var(--Grayscale-40);
+  background: var(--Grayscale-10);
+
+  font-size: 16px;
+  position: relative;
+  transition: border-color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.inputGroup:focus-within {
+  border: 1.5px solid var(--Brown-40);
+  border-color: #2196f3;
+}
+
+.input {
+  flex: 1 0 0;
+  color: var(--Grayscale-60);
+  font-feature-settings:
+    'clig' off,
+    'liga' off;
+  font-size: 1.6rem;
+  line-height: 22px;
+}
+
+.input:focus::placeholder {
+  color: transparent;
+  transition: color 0.3s ease;
+}
+
+.inputGroup:focus-within,
+.input:not(:placeholder-shown) {
+  color: #2196f3;
+}
+
+.inputGroup:not(:focus-within) .input:not(:placeholder-shown) {
+  color: #000000;
+}
