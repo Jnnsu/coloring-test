@@ -28,6 +28,7 @@
     'liga' off;
   font-size: 1.6rem;
   line-height: 22px;
+  height: auto;
 }
 
 .input:focus::placeholder {
